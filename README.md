@@ -40,15 +40,3 @@ $IP $DOMAIN_NAME
 
 
 
-```
-
-
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-
-## How To Create Module ##
-<DIR>/app/console/cake TomatoCms.make Module
