@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+echo \$this->BootstrapForm->input('${1:ModelName}.${1:Fieldname}', array(
+    'type' => 'file',
+    'label' => 'Background Image<br/><em style="color: blue;"></em>',
+    'div' => array(
+        'class' => 'form-group',
+        'id'    => 'div_${1:Fieldname}'
+    )
+));
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tmt-form-upload</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

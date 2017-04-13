@@ -1,0 +1,23 @@
+th a.asc:after {
+    content: ' ⇣';
+}
+th a.desc:after {
+    content: ' ⇡';
+}
+
+form .required {
+    font-weight: bold;
+}
+form .required label:after {
+    color: #e32;
+    content: ' *';
+    display:inline;
+}
+
+.modal-vertical-centered {
+    transform: translate(0, 50%) !important;
+    -ms-transform: translate(0, 50%) !important; /* IE 9 */
+    -webkit-transform: translate(0, 50%) !important; /* Safari and Chrome */
+}
+
+#modalSearchForm .modal-dialog  {width:75%;}

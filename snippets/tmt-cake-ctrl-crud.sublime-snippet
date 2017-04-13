@@ -1,0 +1,45 @@
+<snippet>
+	<content><![CDATA[
+App::uses('${1:PackageName}AppController', '${1:PackageName}.Controller');
+
+class ${2:ControllerName}Controller extends ${1:PackageName}AppController {
+
+	public \$title_for_layout = "${3:ModelName}";
+
+	public \$uses = array(
+		'${1:PackageName}.${3:ModelName}'
+		);
+
+	public \$components = array(
+        'TomatoCms.TomatoCmsCrud' => array(
+            'on_save_message'   => 'Successfully saved',
+            'on_update_message' => 'Successfully updated',
+            'on_delete_message' => 'Successfully deleted',
+
+            'model_class_name' => '${3:ModelName}'
+        )
+    );
+
+    public \$paginate = array(
+        'limit' => 20,
+        'order' => array(
+            '${3:ModelName}.created' => 'DESC'
+        )
+    );
+
+	public function admin_index(){
+	}
+
+	public function admin_add(){}
+
+	public function admin_edit(\$id){
+    }
+
+}
+?>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tmt-ctrl-crud</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

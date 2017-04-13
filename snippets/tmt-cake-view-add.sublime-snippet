@@ -1,0 +1,66 @@
+<snippet>
+	<content><![CDATA[
+\$this->TomatoCrumbs->addCrumbs(
+    '${1:PackageName}',
+    Router::url(array('action'=>'index')),
+    array()
+)->addCrumbs(
+    'Add',
+    'javascript:void(0);',
+    array()
+);
+?>
+
+<h3 class="page-header page-header-top"><i class="icon-plus-sign"></i> Add ${2:PackageName}</h3>
+
+<?PHP echo \$this->BootstrapForm->create('Model', array('novalidate'=>true, 'type'=>'file')); ?>
+
+<div class="form-box-content">
+    <?PHP
+    echo \$this->BootstrapForm->input('Model.fieldname', array(
+        'type' => 'text'
+    ));
+    ?>
+
+    <?PHP
+    echo \$this->BootstrapForm->input('Model.fieldname', array(
+        'type'    => "textarea",
+        "class"   => 'ckeditor',
+        'between' => '<div class="col-md-8">'
+    ));
+    ?>
+
+    <?PHP
+    echo \$this->BootstrapForm->input('Model.fieldname', array(
+        'type' => 'file',
+        'label' => 'Background Image<br/><em style="color: blue;">(Required Dimension 820 x 505)</em>'
+    ));
+    ?>
+
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-md-10">
+            <input class="btn btn-success" id="btnSave" type="submit" value="Save">
+            <button id="btnCancel" class="btn btn-danger" type="submit">Cancel / Back</button>
+        </div>
+    </div>
+</div>
+
+<?PHP echo \$this->BootstrapForm->end(null); ?>
+
+<?php
+\$urlBack = Router::url(array('action'=>'index'));
+\$mystring = <<<EOT
+\$("#btnCancel").on('click', function(e){
+    location.href='{\$urlBack}';
+    return false;
+});
+EOT;
+\$this->Js->buffer(\$mystring);
+?>
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tmt-view-add</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

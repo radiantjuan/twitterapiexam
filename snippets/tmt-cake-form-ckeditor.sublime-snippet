@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+echo \$this->BootstrapForm->input('${1:ModelName}.${2:Fieldname}', array(
+    'type'    => "textarea",
+    "class"   => 'ckeditor',
+    'between' => '<div class="col-md-8">'
+));
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tmt-form-ckeditor</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

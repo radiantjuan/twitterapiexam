@@ -1,0 +1,129 @@
+<snippet>
+	<content><![CDATA[
+\$this->TomatoCrumbs->addCrumbs(
+    '${1:Package Name}',
+    Router::url(array('action'=>'index')),
+    array()
+)->addCrumbs(
+    'Edit',
+    'javascript:void(0);',
+    array()
+);
+?>
+
+<h3 class="page-header page-header-top"><i class="icon-pencil"></i> Edit ${2:Package Name}</h3>
+
+<?PHP echo \$this->BootstrapForm->create('Model', array('novalidate'=>true, 'type'=>'file')); ?>
+
+<?PHP
+echo this->BootstrapForm->hidden('Model.enabled');
+echo this->BootstrapForm->hidden('Model.created');
+echo this->BootstrapForm->hidden('Model.updated');
+echo this->BootstrapForm->hidden('Model.enabled_datetime');
+echo this->BootstrapForm->hidden('Model.id');
+echo this->BootstrapForm->hidden('Model.type');
+echo this->BootstrapForm->hidden('CreatedBy.email');
+echo this->BootstrapForm->hidden('UpdatedBy.email');
+echo this->BootstrapForm->hidden('ActivatedBy.email');
+?>
+
+<div class="form-box-content">
+    <?PHP
+    echo \$this->BootstrapForm->input('Model.fieldname', array(
+        'type' => 'text'
+    ));
+    ?>
+
+    <?PHP
+    echo \$this->BootstrapForm->input('Model.fieldname', array(
+        'type'    => "textarea",
+        "class"   => 'ckeditor',
+        'between' => '<div class="col-md-8">'
+    ));
+    ?>
+
+    <?PHP
+    echo \$this->BootstrapForm->input('Model.fieldname', array(
+        'type' => 'file',
+        'label' => 'Image<br/><em style="color: blue;">(Required Dimension x x x)</em>'
+    ));
+    ?>
+
+    <h4>Other Info</h4>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Created</label>
+        <div class="col-md-6">
+            <p class="form-control-static">
+                <?PHP echo \$this->data['Model']['created']; ?> / <?PHP echo \$this->data['CreatedBy']['email']; ?>
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Updated</label>
+        <div class="col-md-6">
+            <p class="form-control-static">
+                <?PHP echo \$this->data['Model']['updated']; ?> / <?PHP echo \$this->data['UpdatedBy']['email']; ?>
+            </p>
+        </div>
+    </div>
+
+    <?PHP if(\$this->data['Model']['enabled']==1): ?>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Activated By</label>
+        <div class="col-md-6">
+            <p class="form-control-static">
+                <?PHP echo \$this->data['Model']['enabled_datetime']; ?> / <?PHP echo \$this->data['ActivatedBy']['email']; ?>
+            </p>
+        </div>
+    </div>
+    <?PHP endif; ?>
+
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-md-10">
+            <input class="btn btn-success" id="btnSave" type="submit" value="Save">
+            <?PHP if(\$this->data['Model']['enabled']==0): ?>
+                <button type="button" class="btn btn-primary" id="btnActivate"><i class="icon-bolt"></i> Activate / Enable</button>
+            <?PHP endif; ?>
+            <button id="btnCancel" class="btn btn-danger" type="submit">Cancel / Back</button>
+        </div>
+    </div>
+</div>
+
+<?PHP echo \$this->BootstrapForm->end(null); ?>
+
+<?PHP echo \$this->Form->create('FrmActivate', array(
+    'url' => array(
+        'controller' => \$this->request->controller,
+        'action' => 'activate',
+        \$this->request->pass[0]
+    ),
+    'style' => 'display:none;',
+    'id'    => 'FrmActivate'
+)); ?>
+<?PHP echo \$this->Form->end(null); ?>
+
+<?php
+\$urlBack = Router::url(array('action'=>'index'));
+\$mystring = <<<EOT
+\$("#btnCancel").on('click', function(e){
+    location.href='{\$urlBack}';
+    return false;
+});
+
+\$("#btnActivate").unbind('click').bind('click', function(){
+    if(confirm('Are you sure you want to publish?')==false) return false;
+
+    \$("#FrmActivate").submit();
+    return false;
+});
+
+EOT;
+\$this->Js->buffer(\$mystring);
+?>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tmt-view-edit</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>
